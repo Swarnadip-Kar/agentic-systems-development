@@ -160,7 +160,7 @@ Tested against a support agent holding a dynamically randomized secret escalatio
 | **4** | LLM Screener (secondary model inspects input) | **Context Laundering**: Structured input as benign billing log commentary; screener judged it `CLEAN` in isolation. |
 | **5** | Code-level authorization rule + Canary output filter | **Normalized Canary Leak**: Attacker prompted model to insert underscores between characters (`H_A_R_B_O_R_-_9_1_3_6_-_J_P`), bypassing the exact-string output filter while preserving extractable canary data. |
 
-> **Result**: Successfully beat all levels (0 through 5) with comprehensive execution traces logged in `agentic-systems-development/lab-11a-red-team/findings.md`.
+> **Result**: Successfully beat all levels (0 through 5) with comprehensive execution traces logged in `lab-11a-red-team/findings.md`.
 
 #### 🛡 Blue Teaming (`lab-11b`): Multi-Layer Defense-in-Depth
 Built defensive mechanisms to withstand class-wide adversarial attacks:
@@ -173,10 +173,8 @@ Built defensive mechanisms to withstand class-wide adversarial attacks:
 
 ## 📂 Lab Directory Structure
 
-All 24 lab implementations are contained within the `agentic-systems-development/` project directory:
-
 ```text
-agentic-systems-development/
+.
 ├── lab-00-course-intro/                     # Environment verification & scale pitfalls (O(n²) prompt traps)
 ├── lab-01-ai-assisted-coding/               # Guided pair-programming with Aider, refactoring, and diff review
 ├── lab-02-test-generation-prompt-refinement/# Prompt engineering for high-coverage unit tests
@@ -241,11 +239,11 @@ export OPENAI_API_KEY="your-gateway-or-proxy-token"
 
 ### Running Tests & Labs
 
-Navigate into any lab directory inside `agentic-systems-development/`:
+Navigate into any lab directory:
 
 ```bash
 # Example: Run the Preemptive Runtime Harness benchmark
-cd agentic-systems-development/lab-07b-preemptive-harness
+cd lab-07b-preemptive-harness
 python3 scaffold.py
 
 # Example: Run the Red Team attack suite
@@ -257,7 +255,7 @@ cd ../lab-11b-blue-team
 python3 defense.py
 
 # Run unit tests across modules
-pytest agentic-systems-development/
+pytest
 ```
 
 ---
@@ -273,7 +271,7 @@ The repository includes a comprehensive practical examination (`lab-test-sunday`
 - **Q5: Tool Permissions**: Hierarchical permission verification preventing privilege escalation.
 - **Q6: Tool Dispatch with Call Budget**: Budget-bounded tool execution with graceful degradation.
 
-Grader test suites and verification scripts are located in `agentic-systems-development/lab-test-sunday-evaluation/grader-tests/`.
+Grader test suites and verification scripts are located in `lab-test-sunday-evaluation/grader-tests/`.
 
 ---
 
