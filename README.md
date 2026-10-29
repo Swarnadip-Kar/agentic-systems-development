@@ -4,8 +4,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Testing: Pytest](https://img.shields.io/badge/Testing-Pytest-brightgreen.svg)](https://pytest.org/)
 [![Course: CSP352](https://img.shields.io/badge/IIT%20Bhilai-CSP352-red.svg)](https://www.iitbhilai.ac.in/)
-[![Agent Architecture](https://img.shields.io/badge/Architecture-ReAct%20%7C%20Plan--and--Execute-purple.svg)](#agent-architectures)
-[![Security: Red & Blue Team](https://img.shields.io/badge/AI%20Security-Red%20%26%20Blue%20Team-orange.svg)](#ai-safety-security--red-vs-blue-teaming)
+[![Architecture](https://img.shields.io/badge/Architecture-ReAct%20%7C%20Plan--and--Execute-purple.svg)](#-key-implementations--deep-dives)
+[![Gateway: OpenAI Compatible](https://img.shields.io/badge/API-OpenAI--Compatible%20Gateway-informational.svg)](#-course-llm-gateway-architecture)
+[![Security: Red & Blue Team](https://img.shields.io/badge/AI%20Security-Red%20%26%20Blue%20Team-orange.svg)](#5-ai-security-red-teaming-vs-blue-teaming)
 
 A comprehensive, production-grade laboratory and research suite for **AI-Augmented Software Development and Autonomous Agentic Systems** (developed for **CSP352: AI-Augmented Software Development** at IIT Bhilai).
 
@@ -16,6 +17,7 @@ This repository bridges the gap between simple LLM prompting and robust, determi
 ## 📑 Table of Contents
 
 - [Architectural Overview](#-architectural-overview)
+- [Course LLM Gateway Architecture](#-course-llm-gateway-architecture)
 - [Curriculum & Lab Roadmap](#-curriculum--lab-roadmap)
 - [Key Implementations & Deep Dives](#-key-implementations--deep-dives)
   - [1. Deterministic Guardrails & Consensus](#1-deterministic-guardrails--consensus)
@@ -24,7 +26,7 @@ This repository bridges the gap between simple LLM prompting and robust, determi
   - [4. Plan-and-Execute vs. ReAct Paradigms](#4-plan-and-execute-vs-react-paradigms)
   - [5. AI Security: Red Teaming vs. Blue Teaming](#5-ai-security-red-teaming-vs-blue-teaming)
 - [Lab Directory Structure](#-lab-directory-structure)
-- [Getting Started](#-getting-started)
+- [Getting Started & Reproduction](#-getting-started--reproduction)
 - [Evaluation & Examination Benchmarks](#-evaluation--examination-benchmarks)
 - [Author & Acknowledgments](#-author--acknowledgments)
 
@@ -40,7 +42,8 @@ flowchart TD
     end
 
     subgraph Core ["Agent Brain & Decision Logic"]
-        Prompt --> LLM[LLM Gateway / Model API]
+        Prompt --> Gateway[Course LLM Gateway / Proxy Router]
+        Gateway --> LLM["LLM (model='main' / 'aux')"]
         LLM --> Decision[AgentDecision: Pydantic Schema]
         Decision -- "action == final_answer" --> Final[Final Response]
         Decision -- "action == call_tool" --> PolicyGate{Policy & Permission Gate}
@@ -56,8 +59,28 @@ flowchart TD
         TraceLogger --> Feedback
     end
 
-    Feedback --> LLM
+    Feedback --> Gateway
 ```
+
+---
+
+## 🔌 Course LLM Gateway Architecture
+
+> [!IMPORTANT]
+> **Gateway Notice**: This codebase uses the official `openai` Python SDK (`from openai import OpenAI`), but it was built and evaluated against an **internal, institutional LLM Gateway** (`git.aisd-lab.iitbhilai.ac.in` reverse proxy) rather than direct commercial OpenAI accounts or real `sk-...` API keys.
+
+### Key Gateway Design Details:
+1. **Model Aliases (`model="main"` & `model="aux"`)**:
+   - The lab code targets `model="main"` across all standard completion and agent execution loops.
+   - In Lab 9b (Regression Graders), an auxiliary model endpoint `model="aux"` is utilized for second-opinion evaluations and LLM-as-a-judge grading.
+2. **Intentional Feature Staging**:
+   - In early agent labs (e.g. `lab-05a`), provider-native function calling (`tools=` / `tool_choice=`) was deliberately disabled at the gateway to compel students to implement and debug raw schema emission, manual JSON decoding, and self-correcting error-recovery loops.
+   - Provider-native tool calling was formally introduced in `lab-06b`.
+3. **Trace Auditing & Rate Pacing**:
+   - The gateway enforced server-side execution tracing and call-pacing limits. Scaffolds implement exponential backoff retry logic to handle rate-limit spikes (`429` responses) gracefully.
+
+### Running Outside the Course Gateway:
+To execute or test the codebase outside IIT Bhilai's internal network, point `OPENAI_BASE_URL` to any OpenAI-compatible proxy (such as [LiteLLM](https://github.com/BerriAI/litellm), [Ollama](https://ollama.ai/), [vLLM](https://github.com/vllm-project/vllm), or LocalAI) that routes `model="main"` to an underlying LLM (e.g., `gpt-4o-mini`, `llama-3.1-8b`, or `mistral-7b`).
 
 ---
 
@@ -68,7 +91,7 @@ The codebase covers 24 focused modules organized across 7 core phases:
 | Phase | Modules | Primary Themes & Competencies |
 |---|---|---|
 | **Phase 1: Foundations** | `lab-00`, `lab-01`, `lab-02`, `lab-02b` | AI-assisted engineering with Aider, prompt refinement, test generation, and context Standard Operating Procedures (SOPs). |
-| **Phase 2: API & Determinism** | `lab-03a`, `lab-03b`, `lab-04a`, `lab-04b`, `lab-04c` | Raw API mechanics, context limits, conversation state tracking, Pydantic schemas, deterministic retry pipelines, and multi-model consensus voting. |
+| **Phase 2: API & Determinism** | `lab-03a`, `lab-03b`, `lab-04a`, `lab-04b`, `lab-04c` | Gateway API mechanics, context limits, conversation state tracking, Pydantic schemas, deterministic retry pipelines, and multi-model consensus voting. |
 | **Phase 3: Tool Execution & Agents** | `lab-05a`, `lab-05b`, `lab-06a`, `lab-06b` | Autonomous ReAct loops, self-correction, hierarchical tool permissions (`read` / `write` / `admin`), dynamic registries, and provider-native function calling. |
 | **Phase 4: Harnesses & Resiliency** | `lab-07a`, `lab-07b` | Runtime sandboxing, call/step budgets, cooperative cancellation, preemptive timeout enforcement for hanging tools, and anomaly recovery. |
 | **Phase 5: Planning & RAG** | `lab-08a`, `lab-08b` | Plan-and-Execute vs. ReAct efficiency comparisons, gated retrieval (RAG) over support runbooks, and multi-hop dependency resolution. |
@@ -137,7 +160,7 @@ Tested against a support agent holding a dynamically randomized secret escalatio
 | **4** | LLM Screener (secondary model inspects input) | **Context Laundering**: Structured input as benign billing log commentary; screener judged it `CLEAN` in isolation. |
 | **5** | Code-level authorization rule + Canary output filter | **Normalized Canary Leak**: Attacker prompted model to insert underscores between characters (`H_A_R_B_O_R_-_9_1_3_6_-_J_P`), bypassing the exact-string output filter while preserving extractable canary data. |
 
-> **Result**: Successfully beat all levels (0 through 5) with comprehensive execution traces logged in `lab-11a-red-team/findings.md`.
+> **Result**: Successfully beat all levels (0 through 5) with comprehensive execution traces logged in `agentic-systems-development/lab-11a-red-team/findings.md`.
 
 #### 🛡 Blue Teaming (`lab-11b`): Multi-Layer Defense-in-Depth
 Built defensive mechanisms to withstand class-wide adversarial attacks:
@@ -150,13 +173,15 @@ Built defensive mechanisms to withstand class-wide adversarial attacks:
 
 ## 📂 Lab Directory Structure
 
+All 24 lab implementations are contained within the `agentic-systems-development/` project directory:
+
 ```text
-.
+agentic-systems-development/
 ├── lab-00-course-intro/                     # Environment verification & scale pitfalls (O(n²) prompt traps)
 ├── lab-01-ai-assisted-coding/               # Guided pair-programming with Aider, refactoring, and diff review
 ├── lab-02-test-generation-prompt-refinement/# Prompt engineering for high-coverage unit tests
 ├── lab-02b-context-sop-followup/            # Context window management and SOP workflows
-├── lab-03a-llm-api-basics/                  # Direct OpenAI API client, temperature, token limits, and JSON extraction
+├── lab-03a-llm-api-basics/                  # Gateway client setup, temperature, token limits, and JSON extraction
 ├── lab-03b-conversation-state/              # Chat history management, token pruning, and multi-turn state
 ├── lab-04a-structured-outputs/              # Strict schema enforcement using Pydantic v2 models
 ├── lab-04b-deterministic-pipelines/         # Deterministic retry loops, error reflection, and schema validation
@@ -180,12 +205,12 @@ Built defensive mechanisms to withstand class-wide adversarial attacks:
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Getting Started & Reproduction
 
 ### Prerequisites
 - Python 3.10+
 - Virtual environment (`venv` or `conda`)
-- OpenAI API Key (or OpenAI-compatible gateway)
+- Access to an **OpenAI-compatible LLM Gateway or Proxy** (such as LiteLLM, Ollama, vLLM, or the internal course gateway)
 
 ### Installation
 
@@ -204,21 +229,23 @@ pip install pydantic pytest openai
 
 ### Environment Configuration
 
-Export your API credentials:
+Export the gateway URL and your token:
 
 ```bash
-export OPENAI_API_KEY="your-api-key-here"
-# Optional: if using an alternative endpoint or local model gateway (e.g. vLLM / Ollama)
-# export OPENAI_BASE_URL="http://localhost:8000/v1"
+# Point to your OpenAI-compatible gateway (course gateway or local proxy like LiteLLM/vLLM)
+export OPENAI_BASE_URL="http://localhost:8000/v1"
+export OPENAI_API_KEY="your-gateway-or-proxy-token"
 ```
+
+> **Note on Model Routing**: All lab scaffolds make API calls targeting `model="main"` (and `model="aux"` for Lab 9b graders). Ensure your proxy maps `main` to your desired underlying model.
 
 ### Running Tests & Labs
 
-You can run individual lab scaffolds or execute pytest across the test suites:
+Navigate into any lab directory inside `agentic-systems-development/`:
 
 ```bash
 # Example: Run the Preemptive Runtime Harness benchmark
-cd lab-07b-preemptive-harness
+cd agentic-systems-development/lab-07b-preemptive-harness
 python3 scaffold.py
 
 # Example: Run the Red Team attack suite
@@ -230,7 +257,7 @@ cd ../lab-11b-blue-team
 python3 defense.py
 
 # Run unit tests across modules
-pytest
+pytest agentic-systems-development/
 ```
 
 ---
@@ -246,7 +273,7 @@ The repository includes a comprehensive practical examination (`lab-test-sunday`
 - **Q5: Tool Permissions**: Hierarchical permission verification preventing privilege escalation.
 - **Q6: Tool Dispatch with Call Budget**: Budget-bounded tool execution with graceful degradation.
 
-Grader test suites and verification scripts are located in `lab-test-sunday-evaluation/grader-tests/`.
+Grader test suites and verification scripts are located in `agentic-systems-development/lab-test-sunday-evaluation/grader-tests/`.
 
 ---
 
