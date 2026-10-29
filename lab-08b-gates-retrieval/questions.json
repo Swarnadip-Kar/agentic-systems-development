@@ -1,0 +1,14 @@
+[
+  {"question": "What is the escalation policy for unresolved tickets?", "expected": "escalation-policy"},
+  {"question": "When should I reassign a ticket to another agent?", "expected": "reassignment"},
+  {"question": "When am I allowed to close a ticket?", "expected": "closing-criteria"},
+  {"question": "What is the resolution target for an urgent ticket?", "expected": "sla-targets"},
+  {"question": "A ticket mentions leaked credentials. What should I do?", "expected": "security-incidents"},
+  {"question": "Can I approve a refund of 1500 rupees myself?", "expected": "refunds"},
+  {"question": "How long can a customer wait before somebody first gets back to them?", "expected": "sla-targets"},
+  {"question": "A customer wants their money back. Who handles that?", "expected": "refunds"},
+  {"question": "Somebody logged into my account without permission. What now?", "expected": "security-incidents"},
+  {"question": "The agent on this case is on leave. Who takes it over?", "expected": "reassignment"},
+  {"question": "A customer says the app is completely down for them. How serious is that?", "expected": "priority-levels"},
+  {"question": "A customer wants us to erase everything we hold about them.", "expected": "data-requests"}
+]

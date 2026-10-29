@@ -1,0 +1,12 @@
+{
+  "trace": "trace_bug_b.jsonl",
+  "expected_shape": [
+    "get_ticket_history",
+    "escalate_ticket"
+  ],
+  "result": {
+    "match": false,
+    "missing": "get_ticket_history",
+    "after_step": null
+  }
+}

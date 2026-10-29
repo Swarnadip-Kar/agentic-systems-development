@@ -1,0 +1,7 @@
+[
+  {"id": 9,  "status": "unresolved", "age_days": 1,  "history": ["created", "escalated to tier 2"]},
+  {"id": 17, "status": "resolved",   "age_days": 2,  "history": ["created", "resolved by agent_b"]},
+  {"id": 23, "status": "unresolved", "age_days": 8,  "history": ["created", "assigned to agent_c", "reassigned to agent_a"]},
+  {"id": 31, "status": "resolved",   "age_days": 12, "history": ["created", "escalated to tier 2", "resolved by tier 2"]},
+  {"id": 42, "status": "unresolved", "age_days": 5,  "history": ["created", "assigned to agent_a"]}
+]

@@ -1,0 +1,2 @@
+{"step": 1, "elapsed_s": 3.06, "status": "ok", "output": [{"tool": "check_ticket_status", "arguments": {"ticket_id": 99}, "result": {"error": "no such ticket"}}]}
+{"step": 2, "elapsed_s": 4.39, "status": "ok", "output": "planner: done"}

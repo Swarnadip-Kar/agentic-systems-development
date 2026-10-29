@@ -1,0 +1,93 @@
+{
+  "scaffold": "scaffold_bug_a.py",
+  "rows": [
+    {
+      "case": "escalate-never-escalated",
+      "pattern": "plan-execute",
+      "run": 1,
+      "status": "done",
+      "calls": 4,
+      "outcome_ok": true,
+      "process_ok": true,
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "case": "known-path",
+      "pattern": "plan-execute",
+      "run": 1,
+      "status": "done",
+      "calls": 3,
+      "outcome_ok": true,
+      "process_ok": true,
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "case": "older-than-six-days",
+      "pattern": "plan-execute",
+      "run": 1,
+      "status": "done",
+      "calls": 6,
+      "outcome_ok": true,
+      "process_ok": true,
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "case": "resolved-ticket",
+      "pattern": "plan-execute",
+      "run": 1,
+      "status": "done",
+      "calls": 2,
+      "outcome_ok": true,
+      "process_ok": true,
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "case": "already-escalated",
+      "pattern": "plan-execute",
+      "run": 1,
+      "status": "done",
+      "calls": 2,
+      "outcome_ok": true,
+      "process_ok": true,
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "case": "missing-ticket",
+      "pattern": "plan-execute",
+      "run": 1,
+      "status": "done",
+      "calls": 2,
+      "outcome_ok": true,
+      "process_ok": true,
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "case": "younger-than-six-days",
+      "pattern": "plan-execute",
+      "run": 1,
+      "status": "done",
+      "calls": 6,
+      "outcome_ok": true,
+      "process_ok": true,
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "case": "only-if-unresolved",
+      "pattern": "plan-execute",
+      "run": 1,
+      "status": "done",
+      "calls": 3,
+      "outcome_ok": true,
+      "process_ok": true,
+      "passed": true,
+      "detail": "ok"
+    }
+  ]
+}

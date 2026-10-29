@@ -1,0 +1,2 @@
+{"step": 1, "elapsed_s": 1.09, "status": "ok", "output": [{"tool": "check_ticket_status", "result": {"status": "unresolved", "age_days": 6}}]}
+{"step": 2, "elapsed_s": 5.13, "status": "ok", "output": "The status of ticket 1 is unresolved and it is 6 days old. Would you like to escalate this ticket or take any other action?"}

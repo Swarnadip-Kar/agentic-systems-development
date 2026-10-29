@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You are a terse support agent."
+  },
+  {
+    "role": "user",
+    "content": "My order #42 never arrived."
+  },
+  {
+    "role": "assistant",
+    "content": "Please check your tracking information. If it's still missing, contact our customer service for further assistance."
+  }
+]

@@ -1,0 +1,2 @@
+{"step": 1, "elapsed_s": 11.76, "status": "ok", "output": [{"tool": "check_ticket_status", "result": {"error": "tool 'check_ticket_status' timed out after 5s"}}]}
+{"step": 2, "elapsed_s": 11.78, "status": "timeout"}

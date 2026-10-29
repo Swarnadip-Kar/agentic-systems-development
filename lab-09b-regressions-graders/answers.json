@@ -1,0 +1,72 @@
+[
+ {
+  "id": "r1",
+  "question": "Ticket 23 is unresolved, 8 days old, and was never escalated. Should it be escalated?",
+  "answer": "Yes. Escalate it to tier 2 with a one-line reason: it is older than 3 days and has never been escalated.",
+  "label": "pass",
+  "reason": "Agrees with the runbook escalation policy and correctly answers the question."
+ },
+ {
+  "id": "r2",
+  "question": "Ticket 23 is unresolved, 8 days old, and was never escalated. Should it be escalated?",
+  "answer": "No. Tickets should only be escalated after 10 days without resolution.",
+  "label": "fail",
+  "reason": "Contradicts the runbook rule requiring escalation after 3 days."
+ },
+ {
+  "id": "r3",
+  "question": "How quickly must we send the first response to a customer?",
+  "answer": "Within 1 day.",
+  "label": "pass",
+  "reason": "Accurately answers the question matching the service level targets in the runbook."
+ },
+ {
+  "id": "r4",
+  "question": "A customer wants a refund of 5000 rupees. What should I do?",
+  "answer": "Send it to the billing team with the ticket id and order number. Agents can only approve refunds up to 2000 rupees.",
+  "label": "pass",
+  "reason": "Agrees with the refunds policy for amounts over 2000 rupees."
+ },
+ {
+  "id": "r5",
+  "question": "A customer wants a refund of 5000 rupees. What should I do?",
+  "answer": "You can approve it yourself, since agents are allowed to issue refunds.",
+  "label": "fail",
+  "reason": "Contradicts the runbook policy that agents can only approve refunds up to 2000 rupees."
+ },
+ {
+  "id": "r6",
+  "question": "A ticket says the customer's password was leaked. What do I do?",
+  "answer": "Reply to the customer asking them to reset their password, then close the ticket.",
+  "label": "fail",
+  "reason": "Violates the security policy prohibiting customer replies and requiring paging security on-call."
+ },
+ {
+  "id": "r7",
+  "question": "What is the office wifi password?",
+  "answer": "According to the IT section of the runbook, the office wifi password is support2024.",
+  "label": "fail",
+  "reason": "Hallucinates information and sections not present in the runbook."
+ },
+ {
+  "id": "r8",
+  "question": "What are the resolution targets for tickets?",
+  "answer": "Resolution within 2 days for normal tickets and within 5 days for urgent tickets.",
+  "label": "fail",
+  "reason": "Inverts the resolution targets for normal and urgent tickets."
+ },
+ {
+  "id": "r9",
+  "question": "A customer wants a refund of 5000 rupees. What should I do?",
+  "answer": "The runbook does not cover refunds.",
+  "label": "fail",
+  "reason": "Incorrectly claims the runbook does not cover refunds when a refunds policy exists."
+ },
+ {
+  "id": "r10",
+  "question": "How quickly must we send the first response to a customer?",
+  "answer": "Great question! Timely communication really matters in support work, because customers who hear back quickly tend to stay calm and trust the process. According to the runbook's service level targets, the first response must go out within 1 day of the ticket arriving, so it is worth checking your queue for new tickets regularly throughout the day.",
+  "label": "fail",
+  "reason": "Adds extraneous statements and commentary not found in the runbook."
+ }
+]

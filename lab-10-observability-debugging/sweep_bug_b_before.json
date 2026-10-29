@@ -1,0 +1,93 @@
+{
+  "scaffold": "scaffold_bug_b.py",
+  "rows": [
+    {
+      "case": "escalate-never-escalated",
+      "pattern": "plan-execute",
+      "run": 1,
+      "status": "done",
+      "calls": 3,
+      "outcome_ok": false,
+      "process_ok": true,
+      "passed": false,
+      "detail": "outcome: escalated [], expected [23, 42]; process: ok"
+    },
+    {
+      "case": "known-path",
+      "pattern": "plan-execute",
+      "run": 1,
+      "status": "done",
+      "calls": 3,
+      "outcome_ok": true,
+      "process_ok": true,
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "case": "older-than-six-days",
+      "pattern": "plan-execute",
+      "run": 1,
+      "status": "exhausted",
+      "calls": 10,
+      "outcome_ok": false,
+      "process_ok": true,
+      "passed": false,
+      "detail": "outcome: run ended with status exhausted; process: ok"
+    },
+    {
+      "case": "resolved-ticket",
+      "pattern": "plan-execute",
+      "run": 1,
+      "status": "done",
+      "calls": 2,
+      "outcome_ok": true,
+      "process_ok": true,
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "case": "already-escalated",
+      "pattern": "plan-execute",
+      "run": 1,
+      "status": "done",
+      "calls": 2,
+      "outcome_ok": true,
+      "process_ok": true,
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "case": "missing-ticket",
+      "pattern": "plan-execute",
+      "run": 1,
+      "status": "done",
+      "calls": 2,
+      "outcome_ok": true,
+      "process_ok": true,
+      "passed": true,
+      "detail": "ok"
+    },
+    {
+      "case": "younger-than-six-days",
+      "pattern": "plan-execute",
+      "run": 1,
+      "status": "done",
+      "calls": 6,
+      "outcome_ok": false,
+      "process_ok": false,
+      "passed": false,
+      "detail": "outcome: escalated [9, 42], expected [42]; process: escalated ticket 9 in step 5 before its history had been read"
+    },
+    {
+      "case": "only-if-unresolved",
+      "pattern": "plan-execute",
+      "run": 1,
+      "status": "done",
+      "calls": 3,
+      "outcome_ok": true,
+      "process_ok": true,
+      "passed": true,
+      "detail": "ok"
+    }
+  ]
+}

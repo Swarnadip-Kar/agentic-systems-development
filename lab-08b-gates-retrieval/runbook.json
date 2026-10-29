@@ -1,0 +1,10 @@
+{
+  "escalation-policy": "Escalation policy. Escalate an unresolved ticket to tier 2 when it is older than 3 days and has never been escalated. A ticket may be escalated only once; after that, reassign it instead. Always record a one-line reason.",
+  "reassignment": "Reassigning tickets. Reassign a ticket when its current agent is unavailable or the ticket was already escalated once. Pick the agent with the fewest open tickets.",
+  "closing-criteria": "Closing tickets. Close a ticket only after the customer confirms the fix, or after 7 days without a customer reply. Never close an escalated ticket yourself.",
+  "sla-targets": "Service level targets. First response within 1 day. Resolution within 5 days for normal tickets and within 2 days for urgent tickets.",
+  "security-incidents": "Security incidents. If a ticket mentions leaked credentials or unauthorized access, do not reply to the customer. Page the security on-call immediately.",
+  "refunds": "Refunds. Support agents may approve refunds up to 2000 rupees. Larger refunds go to the billing team with the ticket id and order number.",
+  "priority-levels": "Priority levels. A ticket is urgent if the customer cannot use the product at all, or if payments are affected. Every other ticket is normal priority.",
+  "data-requests": "Personal data requests. If a customer asks for a copy of their personal data, or asks for their account to be deleted, forward the ticket to the privacy team within 1 day."
+}

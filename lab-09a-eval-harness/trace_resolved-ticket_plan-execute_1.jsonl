@@ -1,0 +1,2 @@
+{"step": 1, "elapsed_s": 2.4, "status": "ok", "output": [{"tool": "check_ticket_status", "arguments": {"ticket_id": 17}, "result": {"status": "resolved", "age_days": 2}}]}
+{"step": 2, "elapsed_s": 3.39, "status": "ok", "output": "planner: done"}
